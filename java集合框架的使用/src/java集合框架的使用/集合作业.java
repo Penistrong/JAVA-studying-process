@@ -1,7 +1,12 @@
 package java集合框架的使用;
 
 import java.util.*;
-
+/**
+ * 
+ * @author 陈立伟
+ * @修改日期：2017年12月15日下午4:57:23
+ * @描述：使用ArrayList集合，进行简单的登陆系统模拟，查询快，增删慢
+ */
 public class 集合作业 {
 	static Scanner sc = new Scanner(System.in);//构造扫描器对象
 	static Collection users = new ArrayList();//储存用户信息的集合
@@ -108,7 +113,7 @@ public class 集合作业 {
 			while(it.hasNext()) {
 				User user = (User) it.next();
 				String adminPassWord = user.getPassWord();
-				if(user.ID==001&&adminPassWord.equals(password)) {
+				if(user.UserName.equals("admin")&&adminPassWord.equals(password)) {
 					System.out.println("Welcome,admin!");
 					break outer;
 				}else {
@@ -124,6 +129,8 @@ public class 集合作业 {
 			EditUserInformation();
 		}else if(option.equalsIgnoreCase("B")) {
 			DeleteAll();
+		}else {
+			System.out.println("无法识别您的指令，将退出到主界面！");
 		}
 		
 	}
@@ -161,6 +168,7 @@ public class 集合作业 {
 		case 1:
 			System.out.println("删除中");
 			users.removeAll(users);
+			initAdmin();//管理员信息将会被初始化
 			break;
 		case 2:
 			break;
