@@ -9,7 +9,7 @@ public class 集合作业 {
 	public static void main(String[] args) {
 		initAdmin();
 		while(true) {
-			System.out.println("请选择功能： A.登陆   B.注册");
+			System.out.println("请选择功能： A.登陆   B.注册  C.信息管理系统(管理员选项)");
 			String option = sc.next();
 			if(option.equalsIgnoreCase("a")) {
 				System.out.println("您选择了登陆功能...");
@@ -17,6 +17,15 @@ public class 集合作业 {
 			}else if(option.equalsIgnoreCase("b")) {
 				System.out.println("您选择了注册功能...");
 				Register();
+			}else if(option.equalsIgnoreCase("c")){
+				System.out.println("正在进入管理系统");
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					// TODO 自动生成的 catch 块
+					e.printStackTrace();
+				}
+				AdminManagement();
 			}else {
 				System.out.println("无法识别您的指令，请重新输入！");
 			}
@@ -88,6 +97,75 @@ public class 集合作业 {
 				
 				break;//打破大循环
 			}
+		}
+	}
+	
+	public static void AdminManagement() {
+		outer:while(true) {
+			System.out.println("Please type your admin's password to log in!");
+			String password = sc.next();
+			Iterator it = users.iterator();
+			while(it.hasNext()) {
+				User user = (User) it.next();
+				String adminPassWord = user.getPassWord();
+				if(user.ID==001&&adminPassWord.equals(password)) {
+					System.out.println("Welcome,admin!");
+					break outer;
+				}else {
+					System.out.println("You have typed wrong password!");
+					break;
+				}
+			}
+		}
+		System.out.println("欢迎您，管理员，请选择管理选项！");
+		System.out.println("A.修改用户信息 B.格式化管理系统信息 ");
+		String option = sc.next();
+		if(option.equalsIgnoreCase("A")) {
+			EditUserInformation();
+		}else if(option.equalsIgnoreCase("B")) {
+			DeleteAll();
+		}
+		
+	}
+
+	private static void EditUserInformation() {
+		System.out.println("当前系统所有注册用户信息如下：");
+		System.out.println(users);
+		while(true) {
+			System.out.println("请输入您要修改的用户ID");
+			int id = sc.nextInt();
+			int flag = 0;
+			Iterator it = users.iterator();
+			if(it.hasNext()) {
+				User user = (User)it.next();
+				if(user.ID == id) {
+					System.out.println("请输入您所要更改后的ID！");
+					int changeID = sc.nextInt();
+					user.ID = changeID;
+					System.out.println("修改成功，退回主界面！");
+					break;
+				}else {
+					flag = 1;
+				}
+			}
+			if(flag == 1) {
+				System.out.println("系统中不存在该用户！请重新输入");
+			}
+		}
+	}
+	
+	private static void DeleteAll() {
+		System.out.println("若您确如此做，将会导致不可挽回的用户流失信息流失！确认吗？1.确认 2.容我想想");
+		int option = sc.nextInt();
+		switch(option) {
+		case 1:
+			System.out.println("删除中");
+			users.removeAll(users);
+			break;
+		case 2:
+			break;
+		default:
+			System.out.println("无法识别您输入的指令");
 		}
 	}
 }
