@@ -138,19 +138,19 @@ public class 集合作业 {
 	private static void EditUserInformation() {
 		System.out.println("当前系统所有注册用户信息如下：");
 		System.out.println(users);
-		while(true) {
+		outer:while(true) {
 			System.out.println("请输入您要修改的用户ID");
 			int id = sc.nextInt();
 			int flag = 0;
 			Iterator it = users.iterator();
-			if(it.hasNext()) {
+			while(it.hasNext()) {
 				User user = (User)it.next();
 				if(user.ID == id) {
 					System.out.println("请输入您所要更改后的ID！");
 					int changeID = sc.nextInt();
 					user.ID = changeID;
 					System.out.println("修改成功，退回主界面！");
-					break;
+					break outer;
 				}else {
 					flag = 1;
 				}
