@@ -28,6 +28,22 @@ public class LoginIOsystemClientDemo {
 				String line = socketReader.readLine();
 				System.out.println(line);
 			}
+			String serverINFO = socketReader.readLine();
+			String datas[] = serverINFO.split("|");
+			String choice = datas[0];
+			switch(choice) {
+			case "2":
+				System.out.println("即将返回开始界面");
+				break;
+			case "1":
+				boolean DeepFlag = true;
+				while(DeepFlag) {
+					System.out.println("您本次登录的信息为:"+datas[1]+"||"+datas[2]);
+					System.out.println("请选择您要进行的操作:\n ");
+					DeepFlag = false;
+				}
+				break;
+			}
 		}
 		socket.close();
 	}

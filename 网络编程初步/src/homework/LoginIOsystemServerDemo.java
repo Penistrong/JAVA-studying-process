@@ -31,6 +31,7 @@ public class LoginIOsystemServerDemo extends Thread{
 		//核心代码
 		while(true) {
 			try {
+				String choice = "1";
 				//获取到Socket的输入流
 				BufferedReader socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				//获取到Socket的输出流
@@ -46,7 +47,7 @@ public class LoginIOsystemServerDemo extends Thread{
 				//获取用户密码
 				String password = datas[2];
 			
-				System.out.println("来自"+socket.getInetAddress().getHostAddress()+"的信息: "+userName+"|"+password);
+				System.out.println("来自"+socket.getInetAddress().getHostAddress()+"的信息: "+"["+option+"]"+userName+"|"+password);
 			
 				if("a".equalsIgnoreCase(option)) {
 					//选择了登录功能
@@ -57,11 +58,14 @@ public class LoginIOsystemServerDemo extends Thread{
 						String LocalPassword = (String) properties.getProperty(userName);
 						if(LocalPassword.equals(password)) {
 							socketOut.write("登入成功!"+"欢迎,"+userName+"\r\n");
+							choice = "1";
 						}else {
 							socketOut.write("密码错误!\r\n");
+							choice = "2";
 						}	
 					}else {
 						socketOut.write("用户名不存在,请重新输入!\r\n");
+						choice = "2";
 					}
 					socketOut.flush();
 				
@@ -77,23 +81,19 @@ public class LoginIOsystemServerDemo extends Thread{
 						//生成配置文件
 						properties.store(new FileWriter(file), "accounts");
 						socketOut.write("注册成功\r\n");
+						choice = "1";
 					}else {
 						//存在用户名时
 						socketOut.write("该用户名已被注册,请重新输入\r\n");
+						choice = "2";
 					}
 					socketOut.flush();
 				}
+				sendServerINFO(socketOut,choice,userName);
 			} catch (IOException e) {
 				// TODO 自动生成的 catch 块
 				e.printStackTrace();
-			} finally {
-				try {//不管怎样都要关闭每个套接字
-					socket.close();
-				} catch (IOException e) {
-					// TODO 自动生成的 catch 块
-					e.printStackTrace();
-				}
-			}
+			} 
 		}
 	}
 	
@@ -105,7 +105,16 @@ public class LoginIOsystemServerDemo extends Thread{
 			Socket socket = serverSocket.accept();
 			//对每个连接的用户创建一个线程服务于他
 			new LoginIOsystemServerDemo(socket).start();
+			//socket.close();//关闭为每一位连接的用户创建的套接字
 		}
 		serverSocket.close();
 	}
+
+	public void sendServerINFO(OutputStreamWriter socketOut,String choice,String userName) throws IOException{
+		String IPaddress = socket.getInetAddress().getHostAddress();
+		String serverINFO = choice+"|"+userName+"|"+IPaddress;
+		socketOut.write(serverINFO);
+		socketOut.flush();
+	}
+
 }
