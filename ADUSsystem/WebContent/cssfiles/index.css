@@ -5,7 +5,7 @@ div.ssfunction{display:none;position:relative;}
 div.asfunction{display:none;position:relative;}
 div.dsfunction{display:none;position:relative;}
 div.usfunction{display:none;position:relative;}
-a.author{font-family:Î¢ÈíÑÅºÚ;font-size:20px;color:#fffbf0;word-spacing:5px;text-shadow:2px 2px 2px black;}
+a.author{font-family:Î¢ï¿½ï¿½ï¿½Åºï¿½;font-size:20px;color:#fffbf0;word-spacing:5px;text-shadow:2px 2px 2px black;}
 a.author:link,a.author:visited{
 	display:block;text-decoration:none;padding:5px;
 }
@@ -13,7 +13,7 @@ a.author:hover,a.author:active{
 	background-color:#3d3b4f;
 }
 p.flip{text-align:center;background:#e5eecc;border:solid 1px #c3c3c3;padding:5px;color:#9d2933;}
-p.introduction{font-family:Î¢ÈíÑÅºÚ;font-size:18px;color:#16a951;font-weight:bold;text-align:center;margin-top:20px;}
+p.introduction{font-family:Î¢ï¿½ï¿½ï¿½Åºï¿½;font-size:18px;color:#16a951;font-weight:bold;text-align:center;margin-top:20px;}
 p.searchStudent{text-align:center;display:block;background:#e5eecc;border:solid 1px #c3c3c3;padding:5px;color:#9d2933;cursor:pointer;}
 p.addStudent{text-align:center;display:block;background:#e5eecc;border:solid 1px #c3c3c3;padding:5px;color:#9d2933;cursor:pointer;}
 p.deleteStudent{text-align:center;display:block;background:#e5eecc;border:solid 1px #c3c3c3;padding:5px;color:#9d2933;cursor:pointer;}
@@ -34,6 +34,6 @@ table{width:300px;text-align:center;border-collapse:collapse;
 		padding:2px;}
 table td{color:#00ff7f;}
 table#ssfunctionResultform tr td{color:#fffbf0;}
-#form2 tr td{color:yellow;}
+#UpdatingStudentQuery tr td{color:yellow;}
 #form3 tr td{color:red;}
 #form4 tr td{color:#39cafd;}

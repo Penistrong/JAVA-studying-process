@@ -5,7 +5,7 @@ import java.sql.*;
 
 public class DataBaseUtils {
 	private static final String USERNAME = "C##Penistrong";
-	private static final String PASSWORD = "chenliwei";
+	private static final String PASSWORD = "19990816";
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 	
@@ -14,7 +14,7 @@ public class DataBaseUtils {
 	ResultSet rs = null;
 	
 	/**
-	 * ÅÐ¶ÏÊÇ·ñµÇÂ¼³É¹¦µÄ·½·¨
+	 * ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½Â¼ï¿½É¹ï¿½ï¿½Ä·ï¿½ï¿½ï¿½
 	 * @param userName
 	 * @param passWord
 	 * @return
@@ -41,7 +41,7 @@ public class DataBaseUtils {
 		return returnValue;
 	}
 	
-	/**Í¬Òâ¶ÔÊý¾Ý¿âÊý¾Ý½øÐÐÔöÉ¾¸ÄµÄ·½·¨(·Ç²éÑ¯)A/add;U/update;D/delete
+	/**Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½Ý½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ÄµÄ·ï¿½ï¿½ï¿½(ï¿½Ç²ï¿½Ñ¯)A/add;U/update;D/delete
 		@param sql
 		@param arr
 		@return 
@@ -51,22 +51,22 @@ public class DataBaseUtils {
 			connection = getConnection();
 			command = connection.prepareStatement(sql);
 			if(arr!=null && arr.length!=0) {
-				//ÈôÓÐ²ÎÊý£¬Ôò½«²ÎÊý×°Åä½øÓï¾ä
+				//ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò½«²ï¿½ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				for(int i = 0;i<arr.length;i++) {
 					command.setObject(i+1, arr[i]);
 				}
 			}
-			int count = command.executeUpdate();//Ö´ÐÐsqlÓï¾ä,·µ»Ø¸üÐÂµÄ¼ÇÂ¼µÄÌõÄ¿Êý
+			int count = command.executeUpdate();//Ö´ï¿½ï¿½sqlï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ÂµÄ¼ï¿½Â¼ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½
 			if(count>0) {
 				return true;
 			}else {
 				return false;
 			}
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 			e.printStackTrace();
 		}
-		return false;//µ±Î´Ö´ÐÐÊ±Ä¬ÈÏ·µ»Øfalse
+		return false;//ï¿½ï¿½Î´Ö´ï¿½ï¿½Ê±Ä¬ï¿½Ï·ï¿½ï¿½ï¿½false
 	}
 	
 	public ResultSet startQuery(String sql,Object[] arr) {
@@ -87,24 +87,24 @@ public class DataBaseUtils {
 		return null;
 	}
 	
-	//¼ÓÔØÇý¶¯³ÌÐòºóÁ¬½ÓÊý¾Ý¿â
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½
 	public Connection getConnection() {
 		try {
 			Class.forName(DRIVER);
 			connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
 		} catch(Exception e) {
-			throw new RuntimeException("ÌîÈëÌáÊ¾ÐÅÏ¢£¿");
+			throw new RuntimeException("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢ï¿½ï¿½");
 		}
 		return connection;
 	}
 	
-	//ÊÍ·Å×ÊÔ´£¬Ö»ÔÚÐèÒªµÄÊ±ºò·ÃÎÊÊý¾Ý¿â
+	//ï¿½Í·ï¿½ï¿½ï¿½Ô´ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½
 	public void ReleaseResource() {
 		if(rs!=null) {
 			try {
 				rs.close();
 			} catch (SQLException e) {
-				// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+				// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 				e.printStackTrace();
 			}
 		}
@@ -112,7 +112,7 @@ public class DataBaseUtils {
 			try {
 				command.close();
 			} catch (SQLException e) {
-				// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+				// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 				e.printStackTrace();
 			}
 		}
@@ -120,7 +120,7 @@ public class DataBaseUtils {
 			try {
 				connection.close();
 			} catch (SQLException e) {
-				// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+				// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 				e.printStackTrace();
 			}
 		}
